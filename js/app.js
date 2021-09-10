@@ -42,16 +42,19 @@ const reply = [
     ["I love you too", "Me too"],
     ["Have you ever felt bad?", "Glad to hear it"],
     ["Why?", "Why? You shouldn't!", "Try watching TV"],
+    ["goodbye","see ya later"],
+    ["sushi","pizaa","mala xiao gue"]
 ]
 
 
 const random = [
-  "Same",
+  "Go ahead",
   "I feel bad ",
   "Bro...",
   "Try again",
   "I'm listening...",
-  "Tell me more.."
+  "Tell me more..",
+  "Same"
 ]
 
 
@@ -92,11 +95,15 @@ function checkMessage(questionArray,answerArray,string){
         for(let y = 0; y < questionArray[x].length; y++){
                 if(questionArray[x][y] == string){
                   let  answers = answerArray[x];
+                  console.log(answers);
+                  console.log(answers[Math.floor(Math.random() * answers.length)]);
                   reply = answers[Math.floor(Math.random() * answers.length)];
+                  
                   getAnswer = true;
                   break;
                 }
         }
+        // to break loop
         if(getAnswer){
            break;
         }
