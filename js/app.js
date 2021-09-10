@@ -35,7 +35,7 @@ const reply = [
       "Can you guess?",
       "I don't know actually"
     ],
-    ["I am infinite"],
+    ["I am iron-man"],
     ["I am just a bot", "I am a bot. What are you?"],
     ["The one true God, JavaScript"],
     ["I am nameless", "I don't have a name"],
@@ -45,9 +45,17 @@ const reply = [
 ]
 
 
+const random = [
+  "Same",
+  "I feel bad ",
+  "Bro...",
+  "Try again",
+  "I'm listening...",
+  "Tell me more.."
+]
 
 
-window.addEventListener('load',() =>{
+document.addEventListener('DOMContentLoaded',() =>{
         const inputField = document.getElementById("input");
     
     inputField.addEventListener("keydown",(e)=>{
@@ -64,24 +72,27 @@ function output(input){
     let message;
 
     let text = input.toLowerCase();
-
+   
+  
 
     if(checkMessage(question,reply,text)){
       message = checkMessage(question,reply,text);
+    }else{
+      message = random[Math.floor(Math.random() * random.length)];
     }
 
     addChat(input,message);
 }
 
 
-function checkMessage(questionArray,answerArray,text){
+function checkMessage(questionArray,answerArray,string){
     let reply ;
     let getAnswer = false;
     for(let x = 0 ; x < questionArray.length; x++){
         for(let y = 0; y < questionArray[x].length; y++){
-                if(question[x][y] == text){
+                if(questionArray[x][y] == string){
                   let  answers = answerArray[x];
-                  reply = answers[Math.floor(Math.random() * answerArray.length)];
+                  reply = answers[Math.floor(Math.random() * answers.length)];
                   getAnswer = true;
                   break;
                 }
@@ -97,6 +108,27 @@ function checkMessage(questionArray,answerArray,text){
 
 function addChat(input, message) {
   const messagesContainer = document.getElementById("messages");
+  let userDiv = document.createElement("div");
+  userDiv.id = "../img/user";
+  userDiv.className = "user response";
+  userDiv.innerHTML = `<img src="../img/user.png" class="img-height"><span>${input}</span>`;
+  messagesContainer.appendChild(userDiv);
 
-  messagesContainer.innerHTML = `${message}`;
+  let botDiv = document.createElement("div");
+  let botImg = document.createElement("img");
+  let botText = document.createElement("span");
+  botDiv.id = "bot";
+  botImg.src = "../img/bot-mini.png";
+  botImg.className = "img-height";
+  botDiv.className = "bot response";
+  botText.innerText = "Typing...";
+  botDiv.appendChild(botText);
+  botDiv.appendChild(botImg);
+  messagesContainer.appendChild(botDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
+
+  setTimeout(() => {
+    botText.innerText = `${message}`;
+  }, 2000
+  )
 }
