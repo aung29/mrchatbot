@@ -53,7 +53,50 @@ window.addEventListener('load',() =>{
     inputField.addEventListener("keydown",(e)=>{
         if(e.code == "Enter"){
             let input = inputField.value;
-            
+            inputField.value = "";
+            output(input);
         }
-    })
-})
+
+    });
+});
+
+function output(input){
+    let message;
+
+    let text = input.toLowerCase();
+
+
+    if(checkMessage(question,reply,text)){
+      message = checkMessage(question,reply,text);
+    }
+
+    addChat(input,message);
+}
+
+
+function checkMessage(questionArray,answerArray,text){
+    let reply ;
+    let getAnswer = false;
+    for(let x = 0 ; x < questionArray.length; x++){
+        for(let y = 0; y < questionArray[x].length; y++){
+                if(question[x][y] == text){
+                  let  answers = answerArray[x];
+                  reply = answers[Math.floor(Math.random() * answerArray.length)];
+                  getAnswer = true;
+                  break;
+                }
+        }
+        if(getAnswer){
+           break;
+        }
+    }
+    return reply;
+}
+
+
+
+function addChat(input, message) {
+  const messagesContainer = document.getElementById("messages");
+
+  messagesContainer.innerHTML = `${message}`;
+}
