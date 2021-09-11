@@ -76,13 +76,15 @@ function output(input){
 
     let text = input.toLowerCase();
    
-  
+    
 
     if(checkMessage(question,reply,text)){
       message = checkMessage(question,reply,text);
     }else{
       message = random[Math.floor(Math.random() * random.length)];
     }
+
+      
 
     addChat(input,message);
 }
@@ -107,6 +109,9 @@ function checkMessage(questionArray,answerArray,string){
         }
     }
     return reply;
+
+
+  
 }
 
 
@@ -133,6 +138,54 @@ function addChat(input, message) {
   
   setTimeout(() => {
     botText.innerText = `${message}`;
-  }, 2000
-  )
+    textToSpeech(message);
+   
+  }, 2000)
 }
+
+const btn = document.querySelector('.btn');
+
+const recoginition =  new webkitSpeechRecognition();
+console.log(recoginition);
+recoginition.continuous = true;
+recoginition.lang = "en-US";
+recoginition.interimResults = false;
+recoginition.maxAlternatives = 1;
+
+btn.addEventListener('click',() =>{
+  recoginition.start();
+  // recoginition.stop();
+})
+
+  recoginition.onresult = (e) =>{
+    let transcript = e.results[e.results.length -1][0].transcript;
+      // console.log(transcript);
+
+      let voicetalk;
+      if(checkMessage(question,reply,transcript)){
+        voicetalk = checkMessage(question,reply,transcript);
+      }else{
+        voicetalk = random[Math.floor(Math.random() * random.length)];
+      }
+  
+      addChat(transcript,voicetalk);
+}
+      
+const speaking = window.speechSynthesis;
+
+// console.log(voices);
+ 
+const textToSpeech = (string) => {
+  let msg = new SpeechSynthesisUtterance(string);
+  voices = speechSynthesis.getVoices();
+  console.log(voices);
+  msg.text = string;
+  msg.lang = "en-US";
+  msg.voice = voices[18];
+  msg.volume = 1;
+  msg.rate = 1;
+  msg.pitch = 1; 
+  speaking.speak(msg);
+}
+
+  
