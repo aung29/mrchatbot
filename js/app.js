@@ -95,8 +95,6 @@ function checkMessage(questionArray,answerArray,string){
         for(let y = 0; y < questionArray[x].length; y++){
                 if(questionArray[x][y] == string){
                   let  answers = answerArray[x];
-                  console.log(answers);
-                  console.log(answers[Math.floor(Math.random() * answers.length)]);
                   reply = answers[Math.floor(Math.random() * answers.length)];
                   
                   getAnswer = true;
@@ -132,8 +130,7 @@ function addChat(input, message) {
   botDiv.appendChild(botText);
   botDiv.appendChild(botImg);
   messagesContainer.appendChild(botDiv);
-  messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
-
+  
   setTimeout(() => {
     botText.innerText = `${message}`;
   }, 2000
