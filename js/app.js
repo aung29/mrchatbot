@@ -14,7 +14,7 @@ const question = [
   ],
   ["i love you"],
   ["help me", "tell me story", "tell me joke"],
-  ["ah", "yes", "ok", "okay", "nice"],
+  
   ["bye", "good bye", "goodbye", "see you later"],
   ["what should i eat today"],
   ["Where is my girl?"],
@@ -178,10 +178,10 @@ const speaking = window.speechSynthesis;
 const textToSpeech = (string) => {
   let msg = new SpeechSynthesisUtterance(string);
   voices = speechSynthesis.getVoices();
-  console.log(voices);
+  // console.log(voices);
   msg.text = string;
   msg.lang = "en-US";
-  msg.voice = voices[18];
+  msg.voice = voices[2];
   msg.volume = 1;
   msg.rate = 1;
   msg.pitch = 1; 
