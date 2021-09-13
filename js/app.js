@@ -119,16 +119,16 @@ function checkMessage(questionArray,answerArray,string){
 function addChat(input, message) {
   const messagesContainer = document.getElementById("messages");
   let userDiv = document.createElement("div");
-  userDiv.id = "../img/user";
+  userDiv.id = "../img/human.png";
   userDiv.className = "user response";
-  userDiv.innerHTML = `<img src="../img/user.png" class="img-height"><span>${input}</span>`;
+  userDiv.innerHTML = `<img src="../img/human.png" class="img-height"><span>${input}</span>`;
   messagesContainer.appendChild(userDiv);
 
   let botDiv = document.createElement("div");
   let botImg = document.createElement("img");
   let botText = document.createElement("span");
   botDiv.id = "bot";
-  botImg.src = "../img/bot-mini.png";
+  botImg.src = "../img/bot2.png";
   botImg.className = "img-height";
   botDiv.className = "bot response";
   botText.innerText = "Typing...";
@@ -139,7 +139,6 @@ function addChat(input, message) {
   setTimeout(() => {
     botText.innerText = `${message}`;
     textToSpeech(message);
-   
   }, 2000)
 }
 
@@ -152,11 +151,24 @@ recoginition.lang = "en-US";
 recoginition.interimResults = false;
 recoginition.maxAlternatives = 1;
 
-btn.addEventListener('click',() =>{
-  recoginition.start();
-  // recoginition.stop();
-})
 
+
+let firstclick = "";
+let secondclick = "";
+btn.addEventListener('click',() =>{
+
+  if(firstclick == ""){
+      btn.classList.add("btn-on");
+      firstclick = "1";
+      recoginition.start();
+      btn.classList.remove("btn-off");
+  }else if(firstclick == "1"){
+      btn.classList.add("btn-off");
+      recoginition.stop();
+      firstclick = "";
+      btn.classList.remove("btn-on");
+  }
+});
   recoginition.onresult = (e) =>{
     let transcript = e.results[e.results.length -1][0].transcript;
       // console.log(transcript);
