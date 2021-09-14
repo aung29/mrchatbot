@@ -119,16 +119,16 @@ function checkMessage(questionArray,answerArray,string){
 function addChat(input, message) {
   const messagesContainer = document.getElementById("messages");
   let userDiv = document.createElement("div");
-  userDiv.id = "../img/human.png";
+  userDiv.id = "img/human.png";
   userDiv.className = "user response";
-  userDiv.innerHTML = `<img src="../img/human.png" class="img-height"><span>${input}</span>`;
+  userDiv.innerHTML = `<img src="img/human.png" class="img-height"><span>${input}</span>`;
   messagesContainer.appendChild(userDiv);
 
   let botDiv = document.createElement("div");
   let botImg = document.createElement("img");
   let botText = document.createElement("span");
   botDiv.id = "bot";
-  botImg.src = "../img/bot2.png";
+  botImg.src = "img/bot2.png";
   botImg.className = "img-height";
   botDiv.className = "bot response";
   botText.innerText = "Typing...";
